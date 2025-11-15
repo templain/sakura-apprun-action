@@ -45,7 +45,35 @@ inputs:
     description: 'Database URL'
     required: false
     default: ''
-
+  auth-callback-url:
+    description: 'Auth Callback URL'
+    required: false
+    default: ''
+  google-client-id:
+    description: 'Google Client ID'
+    required: false
+    default: ''
+  google-client-secret:
+    description: 'Google Client Secret'
+    required: false
+    default: ''
+  github-client-id:
+    description: 'GitHub Client ID'
+    required: false
+    default: ''
+  github-client-secret:
+    description: 'GitHub Client Secret'
+    required: false
+    default: ''
+  facebook-client-id:
+    description: 'FaceBook Client ID'
+    required: false
+    default: ''
+  facebook-client-secret:
+    description: 'Facebook Client Secret'
+    required: false
+    default: ''
+    
 outputs:
   public-url:
     description: 'The public URL of the deployed application'
@@ -101,6 +129,27 @@ runs:
         ENV_VARS="[]"
         if [ -n "${{ inputs.database-url }}" ]; then
           ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "DATABASE_URL", "value": "${{ inputs.database-url }}"}]')
+        fi
+        if [ -n "${{ inputs.auth-callback-url }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "AUTH_CALLBACK_URL", "value": "${{ inputs.auth-callback-url }}"}]')
+        fi
+        if [ -n "${{ inputs.google-client-id }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "GOOGLE_CLIENT_ID", "value": "${{ inputs.google-client-id }}"}]')
+        fi
+        if [ -n "${{ inputs.google-client-secret }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "GOOGLE_CLIENT_SECRET", "value": "${{ inputs.google-client-secret }}"}]')
+        fi
+        if [ -n "${{ inputs.github-client-id }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "GITHUB_CLIENT_ID", "value": "${{ inputs.github-client-id }}"}]')
+        fi
+        if [ -n "${{ inputs.github-client-secret }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "GITHUB_CLIENT_SECRET", "value": "${{ inputs.github-client-secret }}"}]')
+        fi
+        if [ -n "${{ inputs.facebook-client-id }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "FACEBOOK_CLIENT_ID", "value": "${{ inputs.facebook-client-id }}"}]')
+        fi
+        if [ -n "${{ inputs.facebook-client-secret }}" ]; then
+          ENV_VARS=$(echo "$ENV_VARS" | jq '. + [{"key": "FACEBOOK_CLIENT_SECRET", "value": "${{ inputs.facebook-client-secret }}"}]')
         fi
         
         # Create request body with jq
